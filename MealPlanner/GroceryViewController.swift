@@ -107,6 +107,7 @@ class GroceryViewController: BaseViewController {
     private func setupRecipeView() {
         self.recipeView.layer.borderColor = UIColor.lightGray.cgColor
         self.recipeView.layer.borderWidth = 1
+        self.edgesForExtendedLayout = []
     }
     
     private func updateRecipeView() {
