@@ -24,6 +24,7 @@ class GroceryViewController: BaseViewController {
     @IBOutlet var categoryLabel: LightLabel!
     @IBOutlet var addUpdateRecipeButton: UIButton!
     @IBOutlet var recipeView: WKWebView!
+    @IBOutlet var expandRecipeButton: UIButton!
     
     var grocery: Grocery!
     var isNewGrocery = false
@@ -115,6 +116,7 @@ class GroceryViewController: BaseViewController {
             if let url = URL(string: grocery.recipe) {
                 let request = URLRequest(url: url)                
                 recipeView.isHidden = false
+                expandRecipeButton.isHidden = false
                 recipeView.load(request)
                 addUpdateRecipeButton.setTitle("Update link for recipe", for: .normal)
                 let attributes = [
@@ -181,6 +183,11 @@ class GroceryViewController: BaseViewController {
         let categoriesViewController = CategoriesViewController.createControllerFor(grocery: self.grocery)
         categoriesViewController.delegate = self
         self.navigationController?.pushViewController(categoriesViewController, animated: true)
+    }
+    
+    @IBAction func expandRecipeTapped(_ sender: AnyObject) {
+        let expandedRecipeViewController = ExpandedRecipeViewController.createControllerFor(recipe: self.grocery.recipe)
+        self.navigationController?.pushViewController(expandedRecipeViewController, animated: true)
     }
     
 }

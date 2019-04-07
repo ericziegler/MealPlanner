@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0797282E225A040C00B729E3 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0797282D225A040C00B729E3 /* Ingredient.swift */; };
+		07972830225A0EF300B729E3 /* ExpandedRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0797282F225A0EF300B729E3 /* ExpandedRecipeViewController.swift */; };
 		07A446CD223D001700960304 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A446CC223D001700960304 /* AppDelegate.swift */; };
 		07A446D2223D001700960304 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07A446D0223D001700960304 /* Main.storyboard */; };
 		07A446D4223D001800960304 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A446D3223D001800960304 /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		0797282D225A040C00B729E3 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		0797282F225A0EF300B729E3 /* ExpandedRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedRecipeViewController.swift; sourceTree = "<group>"; };
 		07A446C9223D001700960304 /* MealPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MealPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A446CC223D001700960304 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		07A446D1223D001700960304 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				07B76E17223EC4A900DA31B3 /* GroceryViewController.swift */,
 				07A599EC2250DFF3003DB449 /* CategoriesViewController.swift */,
 				07A599F0225282B5003DB449 /* RecipeViewController.swift */,
+				0797282F225A0EF300B729E3 /* ExpandedRecipeViewController.swift */,
 				07A446D0223D001700960304 /* Main.storyboard */,
 			);
 			name = ViewControllers;
@@ -247,6 +250,7 @@
 				07B76E1B2245ACFE00DA31B3 /* BaseViewController.swift in Sources */,
 				07A446EC223E77B000960304 /* GroceryCell.swift in Sources */,
 				07B76E1F2245AD3A00DA31B3 /* BaseNavigationController.swift in Sources */,
+				07972830225A0EF300B729E3 /* ExpandedRecipeViewController.swift in Sources */,
 				07A599F322528F87003DB449 /* MealPlannerTests.swift in Sources */,
 				07A446EA223E764F00960304 /* GroceryList.swift in Sources */,
 			);

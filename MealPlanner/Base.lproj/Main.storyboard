@@ -108,7 +108,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AV2-PW-ifm" customClass="LightLabel" customModule="MealPlanner" customModuleProvider="target">
-                                                <rect key="frame" x="109" y="8" width="35.5" height="21"/>
+                                                <rect key="frame" x="109" y="8" width="36" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -198,20 +198,6 @@
                                                     <action selector="addRecipeTapped:" destination="uhz-6x-at3" eventType="touchUpInside" id="NmB-BL-J8g"/>
                                                 </connections>
                                             </button>
-                                            <wkWebView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKb-aj-veI">
-                                                <rect key="frame" x="12" y="211" width="351" height="422"/>
-                                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <wkWebViewConfiguration key="configuration">
-                                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                                    <wkPreferences key="preferences"/>
-                                                </wkWebViewConfiguration>
-                                            </wkWebView>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dsn-3I-EjB" customClass="LightLabel" customModule="MealPlanner" customModuleProvider="target">
-                                                <rect key="frame" x="179.5" y="173.5" width="16" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5EQ-32-ih7">
                                                 <rect key="frame" x="235" y="167.5" width="128" height="33"/>
                                                 <state key="normal">
@@ -227,15 +213,42 @@
                                                     </attributedString>
                                                 </state>
                                             </button>
+                                            <wkWebView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKb-aj-veI">
+                                                <rect key="frame" x="12" y="211" width="351" height="422"/>
+                                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <wkWebViewConfiguration key="configuration">
+                                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                    <wkPreferences key="preferences"/>
+                                                </wkWebViewConfiguration>
+                                            </wkWebView>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9WO-LG-Ro9" userLabel="ExpandRecipeButton">
+                                                <rect key="frame" x="319" y="211" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="44" id="3U5-o4-Wz7"/>
+                                                    <constraint firstAttribute="height" constant="44" id="J8z-Gk-KjQ"/>
+                                                </constraints>
+                                                <state key="normal" image="Expand"/>
+                                                <connections>
+                                                    <action selector="expandRecipeTapped:" destination="uhz-6x-at3" eventType="touchUpInside" id="eyU-Oc-2tu"/>
+                                                </connections>
+                                            </button>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dsn-3I-EjB" customClass="LightLabel" customModule="MealPlanner" customModuleProvider="target">
+                                                <rect key="frame" x="179.5" y="173.5" width="16" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="hKb-aj-veI" secondAttribute="trailing" constant="12" id="0M6-3P-hee"/>
                                             <constraint firstItem="RnL-Rn-cnC" firstAttribute="top" secondItem="N2E-0c-Xlj" secondAttribute="bottom" constant="18" id="1Sp-sX-anJ"/>
                                             <constraint firstAttribute="trailing" secondItem="Ytv-Yc-BEJ" secondAttribute="trailing" constant="12" id="4PX-gS-V7D"/>
+                                            <constraint firstItem="9WO-LG-Ro9" firstAttribute="top" secondItem="hKb-aj-veI" secondAttribute="top" id="5AT-Wk-KrM"/>
                                             <constraint firstAttribute="trailing" secondItem="5EQ-32-ih7" secondAttribute="trailing" constant="12" id="AH7-2X-VIE"/>
                                             <constraint firstItem="AV2-PW-ifm" firstAttribute="baseline" secondItem="hLF-fJ-YWU" secondAttribute="baseline" id="BNu-WX-Pan"/>
                                             <constraint firstItem="PGz-Ql-dE7" firstAttribute="top" secondItem="gl0-LM-DnB" secondAttribute="bottom" constant="7" id="Ctx-kr-fMJ"/>
+                                            <constraint firstItem="9WO-LG-Ro9" firstAttribute="trailing" secondItem="hKb-aj-veI" secondAttribute="trailing" id="D1G-1G-LdA"/>
                                             <constraint firstAttribute="trailing" secondItem="gl0-LM-DnB" secondAttribute="trailing" constant="12" id="E4y-yl-GuT"/>
                                             <constraint firstItem="AV2-PW-ifm" firstAttribute="leading" secondItem="hLF-fJ-YWU" secondAttribute="trailing" constant="28" id="FAH-nm-i2y"/>
                                             <constraint firstItem="hKb-aj-veI" firstAttribute="top" secondItem="PGz-Ql-dE7" secondAttribute="bottom" constant="12" id="H8O-C9-syA"/>
@@ -293,6 +306,7 @@
                     <connections>
                         <outlet property="addUpdateRecipeButton" destination="PGz-Ql-dE7" id="qOH-nw-a81"/>
                         <outlet property="categoryLabel" destination="Jby-0x-qP6" id="IC1-b6-CcT"/>
+                        <outlet property="expandRecipeButton" destination="9WO-LG-Ro9" id="NMC-PS-i0c"/>
                         <outlet property="nameTextField" destination="OBA-gi-m97" id="YjZ-L1-mEi"/>
                         <outlet property="quantityTextField" destination="zQv-Te-yGg" id="Sjq-3c-SFh"/>
                         <outlet property="recipeView" destination="hKb-aj-veI" id="m9i-36-Kc9"/>
@@ -425,9 +439,44 @@
             </objects>
             <point key="canvasLocation" x="-134" y="752"/>
         </scene>
+        <!--Expanded Recipe View Controller-->
+        <scene sceneID="z7z-w7-9KB">
+            <objects>
+                <viewController storyboardIdentifier="ExpandedRecipeViewId" id="A0n-1S-ioi" customClass="ExpandedRecipeViewController" customModule="MealPlanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PU3-wD-xur">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KJ1-Ai-wWF">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="MWY-qr-B4b" firstAttribute="bottom" secondItem="KJ1-Ai-wWF" secondAttribute="bottom" id="8gn-8F-A5P"/>
+                            <constraint firstItem="MWY-qr-B4b" firstAttribute="trailing" secondItem="KJ1-Ai-wWF" secondAttribute="trailing" id="F0B-nu-2uE"/>
+                            <constraint firstItem="KJ1-Ai-wWF" firstAttribute="leading" secondItem="MWY-qr-B4b" secondAttribute="leading" id="VIU-S0-Qao"/>
+                            <constraint firstItem="KJ1-Ai-wWF" firstAttribute="top" secondItem="MWY-qr-B4b" secondAttribute="top" id="oMg-TU-7BV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="MWY-qr-B4b"/>
+                    </view>
+                    <connections>
+                        <outlet property="recipeView" destination="KJ1-Ai-wWF" id="Wcg-aV-hDZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="clH-H5-Kdm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3356" y="758"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Checkmark" width="33" height="24"/>
         <image name="ChevronRight" width="13" height="24"/>
+        <image name="Expand" width="24" height="24"/>
     </resources>
 </document>
