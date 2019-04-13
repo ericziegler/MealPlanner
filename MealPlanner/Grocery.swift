@@ -37,7 +37,7 @@ class Grocery: NSObject, NSCoding {
     var category = GeneralCategory
     var recipe = ""
     var ingredients = [Ingredient]()
-    var lastMade: Date?
+    var lastMade = Date(timeIntervalSince1970: 0)
     
     // MARK: - Init
     
@@ -91,11 +91,9 @@ class Grocery: NSObject, NSCoding {
     
     func formattedLastMadeDate() -> String {
         var result = "Never Made"
-        if let date = self.lastMade {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MM/dd/yyyy"
-            result = formatter.string(from: date)
-        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        result = formatter.string(from: self.lastMade)
         return result
     }
     

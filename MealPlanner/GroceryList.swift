@@ -11,13 +11,22 @@ import Foundation
 // MARK: - Constants
 
 let GroceryListCacheKey = "GroceryListCacheKey"
+let GroceryListFilterCacheKey = "GroceryListFilterCacheKey"
 let GeneralCategory = "General"
+
+// MARK: - Enums
+
+enum GroceryFilter: Int {
+    case category
+    case lastMade
+}
 
 class GroceryList {
     
     // MARK: - Properties
     
     var groceries: [Grocery] = []
+    var filterType: GroceryFilter = .category
     
     // MARK: - Init
     
@@ -35,8 +44,13 @@ class GroceryList {
                 self.groceries = groceries
             }
         }
+        let filterInt = UserDefaults.standard.integer(forKey: GroceryListFilterCacheKey)
+        if let type = GroceryFilter(rawValue: filterInt) {
+            filterType = type
+        }
     }
     
+    // only used for testing
     func clearGroceriesFromCache() {
         self.groceries.removeAll()
         let groceryListData = NSKeyedArchiver.archivedData(withRootObject: self.groceries)
@@ -49,6 +63,7 @@ class GroceryList {
     func saveGroceriesToCache() {
         let groceryListData = NSKeyedArchiver.archivedData(withRootObject: self.groceries)
         UserDefaults.standard.set(groceryListData, forKey: GroceryListCacheKey)
+        UserDefaults.standard.set(filterType.rawValue, forKey: GroceryListFilterCacheKey)
         UserDefaults.standard.synchronize()
     }
     
@@ -61,6 +76,19 @@ class GroceryList {
             }
         }
         self.saveGroceriesToCache()
+    }
+    
+    func sortedLastMade() -> [Grocery] {
+        var result = [Grocery]()
+        // only sort groceries that have ingredients or a recipe url
+        for curGrocery in groceries {
+            if curGrocery.ingredients.count > 0 || curGrocery.recipe.count > 0 {
+                result.append(curGrocery)
+            }
+        }
+        // sort
+        result = result.sorted(by: { $0.lastMade.compare($1.lastMade) == .orderedDescending })
+        return result
     }
     
     func groceriesForCategory(category: String) -> [Grocery] {

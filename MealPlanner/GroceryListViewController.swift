@@ -64,10 +64,12 @@ class GroceryListViewController: BaseViewController {
     @IBAction func filterTapped(_ sender: AnyObject) {
         let actionSheet = UIAlertController(title: "Filter Groceries By", message: nil, preferredStyle: .actionSheet)
         let categoryAction = UIAlertAction(title: "Category", style: .default) { (action) in
-            print("Category Selected")
+            self.groceryList.filterType = .category
+            self.updateFilter()
         }
         let dateAction = UIAlertAction(title: "Last Made", style: .default) { (action) in
-            print("Date Selected")
+            self.groceryList.filterType = .lastMade
+            self.updateFilter()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             self.dismiss(animated: true, completion: nil)
@@ -86,22 +88,39 @@ class GroceryListViewController: BaseViewController {
         }
     }
     
+    private func updateFilter() {
+        groceryList.saveGroceriesToCache()
+        self.groceriesTable.reloadData()
+    }
+    
 }
 
 extension GroceryListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        if groceryList.filterType == .lastMade {
+            return 1
+        }
         return categoryList.categories.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let category = categoryList.categories[section]
-        return groceryList.groceriesForCategory(category: category).count
+        if groceryList.filterType == .lastMade {
+            return groceryList.sortedLastMade().count
+        } else {
+            let category = categoryList.categories[section]
+            return groceryList.groceriesForCategory(category: category).count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let category = categoryList.categories[indexPath.section]
-        let grocery = groceryList.groceriesForCategory(category: category)[indexPath.row]
+        var grocery: Grocery!
+        if groceryList.filterType == .lastMade {
+            grocery = groceryList.sortedLastMade()[indexPath.row]
+        } else {
+            let category = categoryList.categories[indexPath.section]
+            grocery = groceryList.groceriesForCategory(category: category)[indexPath.row]
+        }
         let groceryCell: GroceryCell = tableView.dequeueReusableCell(withIdentifier: GroceryCellId, for: indexPath as IndexPath) as! GroceryCell
         groceryCell.delegate = self
         groceryCell.indexPath = indexPath
@@ -110,7 +129,7 @@ extension GroceryListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if groceryList.groceriesForCategory(category: categoryList.categories[section]).count > 0 {
+        if groceryList.filterType == .category && groceryList.groceriesForCategory(category: categoryList.categories[section]).count > 0 {
             return categoryList.categories[section]
         }
         return nil;
@@ -119,8 +138,13 @@ extension GroceryListViewController: UITableViewDelegate, UITableViewDataSource 
     // MARK: UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let category = categoryList.categories[indexPath.section]
-        let grocery = groceryList.groceriesForCategory(category: category)[indexPath.row]
+        var grocery: Grocery!
+        if groceryList.filterType == .lastMade {
+            grocery = groceryList.sortedLastMade()[indexPath.row]
+        } else {
+            let category = categoryList.categories[indexPath.section]
+            grocery = groceryList.groceriesForCategory(category: category)[indexPath.row]
+        }
         self.displayGrocery(grocery: grocery)
     }
     
@@ -128,10 +152,19 @@ extension GroceryListViewController: UITableViewDelegate, UITableViewDataSource 
         if editingStyle == .delete {
             let alert = UIAlertController(title: "Remove Item", message: "Are you sure you would like to remove this grocery item?", preferredStyle: .alert)
             let removeAction = UIAlertAction(title: "Remove", style: .destructive) { (action) in
-                let category = self.categoryList.categories[indexPath.section]
-                let grocery = self.groceryList.groceriesForCategory(category: category)[indexPath.row]
-                if let index = self.groceryList.groceries.index(of: grocery) {
-                    self.groceryList.groceries.remove(at: index)
+                var grocery: Grocery!
+                if self.groceryList.filterType == .lastMade {
+                    var sortedGroceryList = self.groceryList.sortedLastMade()
+                    grocery = sortedGroceryList[indexPath.row]
+                    if let index = sortedGroceryList.index(of: grocery) {
+                        sortedGroceryList.remove(at: index)
+                    }
+                } else {
+                    let category = self.categoryList.categories[indexPath.section]
+                    grocery = self.groceryList.groceriesForCategory(category: category)[indexPath.row]
+                    if let index = self.groceryList.groceries.index(of: grocery) {
+                        self.groceryList.groceries.remove(at: index)
+                    }
                 }
                 self.groceryList.saveGroceriesToCache()
                 tableView.deleteRows(at: [indexPath], with: .fade)
