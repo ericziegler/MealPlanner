@@ -15,7 +15,9 @@ let GroceryNameCacheKey = "GroceryNameCacheKey"
 let GroceryQuantityCacheKey = "GroceryQuantityCacheKey"
 let GroceryStatusCacheKey = "GroceryStatusCacheKey"
 let GroceryCategoryCacheKey = "GroceryCategoryCacheKey"
+let GroceryIngredientsCacheKey = "GroceryIngredientsCacheKey"
 let GroceryRecipeCacheKey = "GroceryRecipeCacheKey"
+let GroceryLastMadeCacheKey = "GroceryLastMadeCacheKey"
 
 // MARK: - Enums
 
@@ -34,6 +36,8 @@ class Grocery: NSObject, NSCoding {
     var quantity = "1"
     var category = GeneralCategory
     var recipe = ""
+    var ingredients = [Ingredient]()
+    var lastMade: Date?
     
     // MARK: - Init
     
@@ -62,6 +66,12 @@ class Grocery: NSObject, NSCoding {
         if let groceryRecipe = decoder.decodeObject(forKey: GroceryRecipeCacheKey) as? String {
             self.recipe = groceryRecipe
         }
+        if let ingredientsData = decoder.decodeObject(forKey: GroceryIngredientsCacheKey) as? Data, let groceryIngredients = NSKeyedUnarchiver.unarchiveObject(with: ingredientsData) as? [Ingredient]{
+            self.ingredients = groceryIngredients
+        }
+        if let groceryLastMade = decoder.decodeObject(forKey: GroceryLastMadeCacheKey) as? Date {
+            self.lastMade = groceryLastMade
+        }
     }
     
     public func encode(with coder: NSCoder) {
@@ -72,6 +82,21 @@ class Grocery: NSObject, NSCoding {
         coder.encode(self.quantity, forKey: GroceryQuantityCacheKey)
         coder.encode(self.category, forKey: GroceryCategoryCacheKey)
         coder.encode(self.recipe, forKey: GroceryRecipeCacheKey)
+        let ingredientsData = NSKeyedArchiver.archivedData(withRootObject: self.ingredients)
+        coder.encode(ingredientsData, forKey: GroceryIngredientsCacheKey)
+        coder.encode(self.lastMade, forKey: GroceryLastMadeCacheKey)
+    }
+    
+    // MARK: - Convenience Functions
+    
+    func formattedLastMadeDate() -> String {
+        var result = "Never Made"
+        if let date = self.lastMade {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM/dd/yyyy"
+            result = formatter.string(from: date)
+        }
+        return result
     }
     
 }

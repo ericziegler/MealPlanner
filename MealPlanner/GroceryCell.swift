@@ -11,7 +11,7 @@ import UIKit
 // MARK: Constants
 
 let GroceryCellId = "GroceryCellId"
-let GroceryListCellHeight: CGFloat = 50.0
+let GroceryListCellHeight: CGFloat = 70.0
 let NameLabelLeadingConstraintClose: CGFloat = 8.0
 let NameLabelLeadingConstraintFar: CGFloat = 36.0
 
@@ -27,6 +27,8 @@ class GroceryCell: UITableViewCell {
     
     @IBOutlet weak var groceryNameLabel: RegularLabel!
     @IBOutlet weak var groceryStatusButton: LightButton!
+    @IBOutlet weak var groceryDateLabel: LightLabel!
+    @IBOutlet weak var groceryNameTopConstraint: NSLayoutConstraint!
     
     var grocery: Grocery?
     var delegate: GroceryCellDelegate?
@@ -54,6 +56,14 @@ class GroceryCell: UITableViewCell {
             groceryStatusButton.setTitleColor(UIColor.white, for: .normal)
             groceryStatusButton.layer.borderColor = UIColor.main.cgColor
             groceryStatusButton.backgroundColor = UIColor.main
+        }
+        if grocery.ingredients.count > 0 || grocery.recipe.count > 0 {
+            groceryDateLabel.isHidden = false
+            groceryDateLabel.text = grocery.formattedLastMadeDate()
+            groceryNameTopConstraint.constant = 20
+        } else {
+            groceryDateLabel.isHidden = true
+            groceryNameTopConstraint.constant = 0
         }
     }
     
