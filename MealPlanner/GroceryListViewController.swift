@@ -44,12 +44,38 @@ class GroceryListViewController: BaseViewController {
             
             self.navigationItem.rightBarButtonItems = [addItem]
         }
+        if let filterImage = UIImage(named: "Filter")?.maskedImageWithColor(UIColor.navAccent) {
+            let filterButton = UIButton(type: .custom)
+            filterButton.addTarget(self, action: #selector(filterTapped(_:)), for: .touchUpInside)
+            filterButton.setImage(filterImage, for: .normal)
+            filterButton.frame = CGRect(x: 0, y: 0, width: filterImage.size.width, height: filterImage.size.height)
+            let filterItem = UIBarButtonItem(customView: filterButton)
+            
+            self.navigationItem.leftBarButtonItems = [filterItem]
+        }
     }
     
     // MARK: - Actions
     
     @IBAction func addTapped(_ sender: AnyObject) {
         self.displayGrocery(grocery: nil)
+    }
+    
+    @IBAction func filterTapped(_ sender: AnyObject) {
+        let actionSheet = UIAlertController(title: "Filter Groceries By", message: nil, preferredStyle: .actionSheet)
+        let categoryAction = UIAlertAction(title: "Category", style: .default) { (action) in
+            print("Category Selected")
+        }
+        let dateAction = UIAlertAction(title: "Last Made", style: .default) { (action) in
+            print("Date Selected")
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        actionSheet.addAction(categoryAction)
+        actionSheet.addAction(dateAction)
+        actionSheet.addAction(cancelAction)
+        self.present(actionSheet, animated: true, completion: nil)
     }
     
     private func displayGrocery(grocery: Grocery?) {
