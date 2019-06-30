@@ -46,9 +46,10 @@ class CategoriesViewController: BaseViewController {
     }
     
     private func setupNavBar() {
-        self.navigationItem.title = "Categories"
-        let addSaveItem = UIBarButtonItem(title: "New", style: .plain, target: self, action: #selector(addTapped(_:)))
-        self.navigationItem.rightBarButtonItems = [addSaveItem]
+        // TODO: EZ - Decide whether allowing new categories should be an option
+//        self.navigationItem.title = "Categories"
+//        let addSaveItem = UIBarButtonItem(title: "New Category", style: .plain, target: self, action: #selector(addTapped(_:)))
+//        self.navigationItem.rightBarButtonItems = [addSaveItem]
     }
     
     // MARK: - Actions

@@ -225,12 +225,16 @@
                                                 </state>
                                             </button>
                                             <wkWebView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKb-aj-veI">
-                                                <rect key="frame" x="12" y="211" width="351" height="422"/>
+                                                <rect key="frame" x="12" y="211" width="351" height="352"/>
                                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <wkWebViewConfiguration key="configuration">
+                                                <gestureRecognizers/>
+                                                <wkWebViewConfiguration key="configuration" allowsInlineMediaPlayback="YES">
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>
                                                 </wkWebViewConfiguration>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="Nha-Yp-Zf4" appends="YES" id="Ksr-Co-wH0"/>
+                                                </connections>
                                             </wkWebView>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9WO-LG-Ro9" userLabel="ExpandRecipeButton">
                                                 <rect key="frame" x="319" y="211" width="44" height="44"/>
@@ -249,6 +253,37 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJX-XV-KY0" customClass="BoldButton" customModule="MealPlanner" customModuleProvider="target">
+                                                <rect key="frame" x="84" y="573" width="207" height="44"/>
+                                                <color key="backgroundColor" red="0.38823529411764707" green="0.68627450980392157" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="RH1-Yo-yrc"/>
+                                                    <constraint firstAttribute="width" constant="207" id="WsI-ec-wVc"/>
+                                                </constraints>
+                                                <state key="normal" title="I Just Made This!"/>
+                                                <connections>
+                                                    <action selector="justMadeTapped:" destination="uhz-6x-at3" eventType="touchUpInside" id="RGr-Gb-Bup"/>
+                                                </connections>
+                                            </button>
+                                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5T0-hp-eSz">
+                                                <rect key="frame" x="127.5" y="273.5" width="120" height="120"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ThumbsUp" translatesAutoresizingMaskIntoConstraints="NO" id="gpe-r3-oFi">
+                                                        <rect key="frame" x="20" y="20" width="80" height="80"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="80" id="7R7-eN-cP3"/>
+                                                            <constraint firstAttribute="width" constant="80" id="G5N-Gb-vv0"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="gpe-r3-oFi" firstAttribute="centerX" secondItem="5T0-hp-eSz" secondAttribute="centerX" id="VTb-D5-9NY"/>
+                                                    <constraint firstAttribute="width" constant="120" id="hdF-oC-YUT"/>
+                                                    <constraint firstItem="gpe-r3-oFi" firstAttribute="centerY" secondItem="5T0-hp-eSz" secondAttribute="centerY" id="oIm-RE-8ig"/>
+                                                    <constraint firstAttribute="height" constant="120" id="voN-5D-qnH"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -271,12 +306,14 @@
                                             <constraint firstItem="N2E-0c-Xlj" firstAttribute="top" secondItem="Ytv-Yc-BEJ" secondAttribute="bottom" constant="28" id="PHB-Ga-UBu"/>
                                             <constraint firstItem="zQv-Te-yGg" firstAttribute="top" secondItem="hLF-fJ-YWU" secondAttribute="bottom" constant="8" id="PXQ-1v-395"/>
                                             <constraint firstItem="Ytv-Yc-BEJ" firstAttribute="top" secondItem="OBA-gi-m97" secondAttribute="bottom" constant="8" id="R0V-hd-KCM"/>
+                                            <constraint firstItem="5T0-hp-eSz" firstAttribute="centerX" secondItem="BDA-V7-u0K" secondAttribute="centerX" id="Rni-fO-zgT"/>
                                             <constraint firstItem="OBA-gi-m97" firstAttribute="top" secondItem="AV2-PW-ifm" secondAttribute="bottom" constant="8" id="SXP-YJ-bJD"/>
                                             <constraint firstItem="gl0-LM-DnB" firstAttribute="leading" secondItem="BDA-V7-u0K" secondAttribute="leading" constant="12" id="TCl-dL-XP3"/>
-                                            <constraint firstAttribute="bottom" secondItem="hKb-aj-veI" secondAttribute="bottom" constant="34" id="V92-pP-T4Q"/>
+                                            <constraint firstAttribute="bottom" secondItem="hKb-aj-veI" secondAttribute="bottom" constant="104" id="V92-pP-T4Q"/>
                                             <constraint firstAttribute="trailing" secondItem="N2E-0c-Xlj" secondAttribute="trailing" constant="12" id="Wlo-tL-s3y"/>
                                             <constraint firstItem="Niy-6x-pTl" firstAttribute="leading" secondItem="BDA-V7-u0K" secondAttribute="leading" constant="12" id="aIn-4K-XNr"/>
                                             <constraint firstItem="Dsn-3I-EjB" firstAttribute="centerY" secondItem="PGz-Ql-dE7" secondAttribute="centerY" id="c0j-og-aVz"/>
+                                            <constraint firstItem="wJX-XV-KY0" firstAttribute="top" secondItem="hKb-aj-veI" secondAttribute="bottom" constant="10" id="gEe-hU-Lsd"/>
                                             <constraint firstItem="hLF-fJ-YWU" firstAttribute="leading" secondItem="BDA-V7-u0K" secondAttribute="leading" constant="12" id="gVa-4F-pFS"/>
                                             <constraint firstAttribute="trailing" secondItem="Niy-6x-pTl" secondAttribute="trailing" constant="12" id="giS-mw-3LV"/>
                                             <constraint firstItem="N2E-0c-Xlj" firstAttribute="leading" secondItem="Jby-0x-qP6" secondAttribute="trailing" constant="8" id="h5x-MG-V3y"/>
@@ -284,11 +321,13 @@
                                             <constraint firstItem="Ytv-Yc-BEJ" firstAttribute="leading" secondItem="BDA-V7-u0K" secondAttribute="leading" constant="12" id="i8E-zz-ST3"/>
                                             <constraint firstItem="PGz-Ql-dE7" firstAttribute="leading" secondItem="BDA-V7-u0K" secondAttribute="leading" constant="12" id="j3M-Ng-k9u"/>
                                             <constraint firstItem="hLF-fJ-YWU" firstAttribute="top" secondItem="BDA-V7-u0K" secondAttribute="top" constant="8" id="jin-Pp-I4d"/>
+                                            <constraint firstItem="5T0-hp-eSz" firstAttribute="centerY" secondItem="BDA-V7-u0K" secondAttribute="centerY" id="k2e-NC-xXX"/>
                                             <constraint firstItem="Niy-6x-pTl" firstAttribute="top" secondItem="zQv-Te-yGg" secondAttribute="bottom" constant="18" id="lXH-Rv-Vai"/>
                                             <constraint firstAttribute="trailing" secondItem="RnL-Rn-cnC" secondAttribute="trailing" constant="12" id="mTk-la-YsT"/>
                                             <constraint firstItem="gl0-LM-DnB" firstAttribute="top" secondItem="Niy-6x-pTl" secondAttribute="bottom" constant="18" id="rbB-JB-UOM"/>
                                             <constraint firstItem="Jby-0x-qP6" firstAttribute="centerY" secondItem="N2E-0c-Xlj" secondAttribute="centerY" id="tXs-jH-M4v"/>
                                             <constraint firstItem="Dsn-3I-EjB" firstAttribute="centerX" secondItem="BDA-V7-u0K" secondAttribute="centerX" id="xfg-8E-rKT"/>
+                                            <constraint firstItem="wJX-XV-KY0" firstAttribute="centerX" secondItem="hKb-aj-veI" secondAttribute="centerX" id="yOa-3H-nnV"/>
                                             <constraint firstItem="OBA-gi-m97" firstAttribute="leading" secondItem="AV2-PW-ifm" secondAttribute="leading" id="z7g-wC-mRF"/>
                                             <constraint firstItem="hKb-aj-veI" firstAttribute="leading" secondItem="BDA-V7-u0K" secondAttribute="leading" constant="12" id="zpR-r1-7XC"/>
                                         </constraints>
@@ -317,7 +356,9 @@
                     <connections>
                         <outlet property="addUpdateRecipeButton" destination="PGz-Ql-dE7" id="qOH-nw-a81"/>
                         <outlet property="categoryLabel" destination="Jby-0x-qP6" id="IC1-b6-CcT"/>
+                        <outlet property="confirmView" destination="5T0-hp-eSz" id="QME-o2-1kj"/>
                         <outlet property="expandRecipeButton" destination="9WO-LG-Ro9" id="NMC-PS-i0c"/>
+                        <outlet property="justMadeButton" destination="wJX-XV-KY0" id="9hD-NA-e8t"/>
                         <outlet property="nameTextField" destination="OBA-gi-m97" id="YjZ-L1-mEi"/>
                         <outlet property="quantityTextField" destination="zQv-Te-yGg" id="Sjq-3c-SFh"/>
                         <outlet property="recipeView" destination="hKb-aj-veI" id="m9i-36-Kc9"/>
@@ -326,6 +367,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f3o-pD-Fta" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="Nha-Yp-Zf4" userLabel="Recipe Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="expandRecipeTapped:" destination="uhz-6x-at3" id="f0B-fd-fqn"/>
+                        <outlet property="delegate" destination="uhz-6x-at3" id="BZC-Nh-MCc"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1357.5999999999999" y="751.57421289355329"/>
         </scene>
@@ -411,7 +458,7 @@
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ewU-W9-CBf">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <wkWebViewConfiguration key="configuration">
+                                <wkWebViewConfiguration key="configuration" allowsInlineMediaPlayback="YES">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
@@ -461,7 +508,7 @@
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KJ1-Ai-wWF">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <wkWebViewConfiguration key="configuration">
+                                <wkWebViewConfiguration key="configuration" allowsInlineMediaPlayback="YES">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
@@ -489,5 +536,6 @@
         <image name="Checkmark" width="33" height="24"/>
         <image name="ChevronRight" width="13" height="24"/>
         <image name="Expand" width="24" height="24"/>
+        <image name="ThumbsUp" width="80" height="80"/>
     </resources>
 </document>

@@ -25,6 +25,8 @@ class GroceryViewController: BaseViewController {
     @IBOutlet var addUpdateRecipeButton: UIButton!
     @IBOutlet var recipeView: WKWebView!
     @IBOutlet var expandRecipeButton: UIButton!
+    @IBOutlet var justMadeButton: BoldButton!
+    @IBOutlet var confirmView: UIView!
     
     var grocery: Grocery!
     var isNewGrocery = false
@@ -49,9 +51,11 @@ class GroceryViewController: BaseViewController {
         self.setupTextFields()
         self.setupNavBar()
         self.setupRecipeView()
+        self.setupJustMadeButton()
+        self.setupConfirmView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.updateRecipeView()
         self.setupCategory()
@@ -111,24 +115,37 @@ class GroceryViewController: BaseViewController {
         self.edgesForExtendedLayout = []
     }
     
+    private func setupJustMadeButton() {        
+        justMadeButton.layer.cornerRadius = justMadeButton.frame.size.height / 2
+    }
+    
+    private func setupConfirmView() {
+        confirmView.layer.cornerRadius = 10
+    }
+    
     private func updateRecipeView() {
-        if let grocery = self.grocery, grocery.recipe.count > 0 {
-            if let url = URL(string: grocery.recipe) {
-                let request = URLRequest(url: url)                
-                recipeView.isHidden = false
-                expandRecipeButton.isHidden = false
-                recipeView.load(request)
-                addUpdateRecipeButton.setTitle("Update link for recipe", for: .normal)
-                let attributes = [
-                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18),
-                    NSAttributedString.Key.foregroundColor : UIColor.main,
-                    NSAttributedString.Key.underlineStyle : 1] as [NSAttributedString.Key : Any]
-                
-                let attributedString = NSMutableAttributedString()
-                attributedString.append(NSAttributedString(string: "Update link for recipe",
-                                                           attributes: attributes))
-                addUpdateRecipeButton.setAttributedTitle(attributedString, for: .normal)
+        if grocery.isMeal == true {
+            if let grocery = self.grocery, grocery.recipe.count > 0 {
+                if let url = URL(string: grocery.recipe) {
+                    let request = URLRequest(url: url)
+                    recipeView.isHidden = false
+                    expandRecipeButton.isHidden = false
+                    recipeView.load(request)
+                    addUpdateRecipeButton.setTitle("Update link for recipe", for: .normal)
+                    let attributes = [
+                        NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18),
+                        NSAttributedString.Key.foregroundColor : UIColor.main,
+                        NSAttributedString.Key.underlineStyle : 1] as [NSAttributedString.Key : Any]
+                    
+                    let attributedString = NSMutableAttributedString()
+                    attributedString.append(NSAttributedString(string: "Update link for recipe",
+                                                               attributes: attributes))
+                    addUpdateRecipeButton.setAttributedTitle(attributedString, for: .normal)
+                }
             }
+        } else {
+            addUpdateRecipeButton.isHidden = true
+            justMadeButton.isHidden = true
         }
     }
     
@@ -148,10 +165,10 @@ class GroceryViewController: BaseViewController {
     @IBAction func addSaveTapped(_ sender: AnyObject) {
         var alertMessage = ""
         if self.nameTextField.text!.count == 0 {
-            alertMessage = "You cannot save unless the item has a name."
+            alertMessage = "You can't save unless the item has a name."
         }
         else if self.quantityTextField.text!.count == 0 {
-            alertMessage = "You cannot save unless the item has a quantity."
+            alertMessage = "You can't save unless the item has a quantity."
         } else {
             if self.isNewGrocery == true {
                 self.grocery = Grocery()
@@ -190,6 +207,18 @@ class GroceryViewController: BaseViewController {
         self.navigationController?.pushViewController(expandedRecipeViewController, animated: true)
     }
     
+    @IBAction func justMadeTapped(_ sender: AnyObject) {
+        grocery.lastMade = Date()
+        GroceryList.shared.saveGroceriesToCache()
+        self.navigationController?.view.isUserInteractionEnabled = false
+        
+        UIView.animate(withDuration: 0.8, animations: {
+            self.confirmView.alpha = 1
+        }) { (didComplete) in
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
 }
 
 extension GroceryViewController: UITextFieldDelegate {
@@ -206,6 +235,14 @@ extension GroceryViewController: CategoriesViewControllerDelegate {
     func categoryWasSelected(category: String, forController: CategoriesViewController) {
         grocery.category = category
         categoryLabel.text = category
+    }
+    
+}
+
+extension GroceryViewController: UIGestureRecognizerDelegate {
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
 }

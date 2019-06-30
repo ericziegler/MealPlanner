@@ -57,13 +57,17 @@ class GroceryCell: UITableViewCell {
             groceryStatusButton.layer.borderColor = UIColor.main.cgColor
             groceryStatusButton.backgroundColor = UIColor.main
         }
-        if grocery.ingredients.count > 0 || grocery.recipe.count > 0 {
-            groceryDateLabel.isHidden = false
+        if let _ = grocery.lastMade {
             groceryDateLabel.text = grocery.formattedLastMadeDate()
             groceryNameTopConstraint.constant = 20
         } else {
-            groceryDateLabel.isHidden = true
             groceryNameTopConstraint.constant = 0
+        }
+                
+        if let _ = grocery.lastMade {
+            groceryDateLabel.isHidden = false
+        } else {
+            groceryDateLabel.isHidden = true
         }
     }
     

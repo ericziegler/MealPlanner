@@ -37,7 +37,15 @@ class Grocery: NSObject, NSCoding {
     var category = GeneralCategory
     var recipe = ""
     var ingredients = [Ingredient]()
-    var lastMade = Date(timeIntervalSince1970: 0)
+    var lastMade: Date?
+    
+    var isMeal: Bool {
+        var result = false        
+        if category == BreakfastCategory || category == LunchCategory || category == DinnerCategory {
+            result = true
+        }
+        return result
+    }
     
     // MARK: - Init
     
@@ -89,11 +97,13 @@ class Grocery: NSObject, NSCoding {
     
     // MARK: - Convenience Functions
     
-    func formattedLastMadeDate() -> String {
+    func formattedLastMadeDate() -> String {        
         var result = "Never Made"
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
-        result = formatter.string(from: self.lastMade)
+        if let lastMade = self.lastMade, lastMade != Date.init(timeIntervalSince1970: 0) {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "M/d/yyyy"
+            result = "Last Made: \(formatter.string(from: lastMade))"
+        }
         return result
     }
     

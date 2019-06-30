@@ -11,6 +11,11 @@ import Foundation
 // MARK: - Constants
 
 let CategoryListCacheKey = "CategoryListCacheKey"
+let GeneralCategory = "General"
+let BreakfastCategory = "Breakfast"
+let LunchCategory = "Lunch"
+let DinnerCategory = "Dinner"
+let SnackCategory = "Snacks"
 
 class CategoryList {
     
@@ -36,11 +41,11 @@ class CategoryList {
         }
         // add a "General" category if there are no categories
         if self.categories.count == 0 {
-            self.categories.append("General")
-            self.categories.append("Breakfast")
-            self.categories.append("Lunch")
-            self.categories.append("Dinner")
-            self.categories.append("Snacks")
+            self.categories.append(GeneralCategory)
+            self.categories.append(BreakfastCategory)
+            self.categories.append(LunchCategory)
+            self.categories.append(DinnerCategory)
+            self.categories.append(SnackCategory)
             self.saveCategoriesToCache()
         }
     }

@@ -35,23 +35,30 @@ class GroceryListViewController: BaseViewController {
     
     private func setupNavBar() {
         self.navigationItem.title = "Groceries"
-        if let addImage = UIImage(named: "Add")?.maskedImageWithColor(UIColor.navAccent) {
+        if let addImage = UIImage(named: "Add")?.maskedImageWithColor(UIColor.navAccent), let filterImage = UIImage(named: "Filter")?.maskedImageWithColor(UIColor.navAccent) {
             let addButton = UIButton(type: .custom)
             addButton.addTarget(self, action: #selector(addTapped(_:)), for: .touchUpInside)
             addButton.setImage(addImage, for: .normal)
             addButton.frame = CGRect(x: 0, y: 0, width: addImage.size.width, height: addImage.size.height)
             let addItem = UIBarButtonItem(customView: addButton)
             
-            self.navigationItem.rightBarButtonItems = [addItem]
-        }
-        if let filterImage = UIImage(named: "Filter")?.maskedImageWithColor(UIColor.navAccent) {
             let filterButton = UIButton(type: .custom)
             filterButton.addTarget(self, action: #selector(filterTapped(_:)), for: .touchUpInside)
             filterButton.setImage(filterImage, for: .normal)
             filterButton.frame = CGRect(x: 0, y: 0, width: filterImage.size.width, height: filterImage.size.height)
             let filterItem = UIBarButtonItem(customView: filterButton)
             
-            self.navigationItem.leftBarButtonItems = [filterItem]
+            self.navigationItem.rightBarButtonItems = [addItem, filterItem]
+        }
+        
+        if let shareImage = UIImage(named: "Share")?.maskedImageWithColor(UIColor.navAccent) {
+            let shareButton = UIButton(type: .custom)
+            shareButton.addTarget(self, action: #selector(shareTapped(_:)), for: .touchUpInside)
+            shareButton.setImage(shareImage, for: .normal)
+            shareButton.frame = CGRect(x: 0, y: 0, width: shareImage.size.width, height: shareImage.size.height)
+            let shareItem = UIBarButtonItem(customView: shareButton)
+            
+            self.navigationItem.leftBarButtonItems = [shareItem]
         }
     }
     
@@ -78,6 +85,12 @@ class GroceryListViewController: BaseViewController {
         actionSheet.addAction(dateAction)
         actionSheet.addAction(cancelAction)
         self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    @IBAction func shareTapped(_ sender: AnyObject) {
+        let items = [groceryList.formattedShareText]
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(ac, animated: true)
     }
     
     private func displayGrocery(grocery: Grocery?) {
